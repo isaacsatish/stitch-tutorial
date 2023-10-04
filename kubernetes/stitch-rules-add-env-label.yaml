@@ -5,11 +5,15 @@ spec:
   - name: "k8s.AddEnvAppLabels"
     description: "Adding environment and application labels using context information from Deploy"
     condition:
-      deployedType: k8s.Resources
+      deployedType: helm.K8SRelease
+      expression: "#input.getStringValue('$.data.tomcat-password') == 'dGlnZXI='"
     processor:
-      - type: k8s.MacroFreemarkerAddLabels # example of using 'k8s.MacroFreemarkerAddLabels' macro as a processor
-        description: "Using macro and context information for parameters from Deploy"
-        parameters:
-          application: "#{#ctx.getCurrentDeployedApplication().getName()}" 
-          environment: "#{#ctx.getCurrentDeployedApplication().getEnvironment().getName()}"
+       - type: freemarker
+         description: "Adding label to kubernetes spec"
+         phase: POST_FLIGHT
+         weight: 30
+         merge:
+           type: overlay
+         parameters:
+           template: |
 

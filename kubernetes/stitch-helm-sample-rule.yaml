@@ -1,0 +1,17 @@
+kind: Rules
+metadata:
+  namespace: k8s-labels
+spec:
+  - name: "k8s.AddLabel"
+    condition:
+      deployedType: helm.K8SRelease
+      expression: "#input.getStringValue('$.data.tomcat-password') == 'dGlnZXI='"
+    processor:
+      - type: freemarker
+        description: "Adding label to kubernetes spec"
+        phase: POST_FLIGHT
+        weight: 30
+        merge:
+          type: overlay
+        parameters:
+          template: |

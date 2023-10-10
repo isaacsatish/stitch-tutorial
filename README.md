@@ -20,3 +20,5 @@ Customizations available for deployments to Kubernetes:
 "stitch-rules-scale-prod.yaml" :
 
 - k8s.StandardJavaSvcProd: Standard configuration for Java FE services in PROD
+
+test commit m2

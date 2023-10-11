@@ -6,8 +6,8 @@ spec:
     description: "Adding environment and application labels using context information from Deploy"
     condition:
       deployedType: helm.K8SRelease
-        expression: "#input.getStringValue('$.kind') == 'Secret'" # activate only for kind:Service
-        expression: "#input.getStringValue('$.data.tomcat-password') == 'c2NvdHQ='"
+      expression: "#input.getStringValue('$.kind') == 'Secret'" # activate only for kind:Service
+      expression: "#input.getStringValue('$.data.tomcat-password') == 'c2NvdHQ='"
     processor:
        - type: freemarker
          description: "Adding label to kubernetes spec"

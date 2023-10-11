@@ -7,7 +7,7 @@ spec:
     condition:
       deployedType: helm.K8SRelease
       expression: "#input.getStringValue('$.kind') == 'Deployment'" # activate only for kind:Service
-      expression: "#input.getStringValue('$.spec.securityContext.containers[0].securityContext.runAsNonRoot') == true"
+      expression: "#input.getStringValue('$.spec.template.spec.securityContext.containers[0].securityContext.runAsNonRoot') == true"
     processor:
        - type: freemarker
          description: "Adding label to kubernetes spec"
